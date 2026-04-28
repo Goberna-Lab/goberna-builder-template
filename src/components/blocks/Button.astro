@@ -1,0 +1,10 @@
+---
+import type { Block } from '../../types/page-data';
+interface Props { block: Block; }
+const { block } = Astro.props;
+const text = String(block.text ?? 'Botón');
+const href = String(block.href ?? '#');
+const variant = String(block.variant ?? 'primary');
+---
+
+<a class={`block-button block-button-${variant}`} href={href}>{text}</a>

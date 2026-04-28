@@ -1,0 +1,8 @@
+---
+import type { Block } from '../../types/page-data';
+interface Props { block: Block; }
+const { block } = Astro.props;
+const text = String(block.text ?? '');
+---
+
+<p class="block-paragraph">{text}</p>

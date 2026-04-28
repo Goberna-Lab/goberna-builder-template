@@ -1,0 +1,28 @@
+{
+  "pages": [
+    {
+      "slug": "/",
+      "title": "Goberna Builder Template — Home",
+      "data": {
+        "blocks": [
+          { "type": "heading", "level": 1, "text": "Bienvenido al template" },
+          {
+            "type": "paragraph",
+            "text": "Esta página de ejemplo se sobreescribe en cada publish desde Nexus."
+          },
+          {
+            "type": "section",
+            "children": [
+              { "type": "heading", "level": 2, "text": "Cómo funciona" },
+              {
+                "type": "paragraph",
+                "text": "El publish-worker reemplaza data/pages.json con el JSON de las pages publicadas y luego corre bun run build."
+              },
+              { "type": "button", "text": "Documentación", "href": "/docs", "variant": "primary" }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

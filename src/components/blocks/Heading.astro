@@ -1,0 +1,10 @@
+---
+import type { Block } from '../../types/page-data';
+interface Props { block: Block; }
+const { block } = Astro.props;
+const level = Math.min(Math.max(block.level ?? 2, 1), 6);
+const Tag = `h${level}`;
+const text = String(block.text ?? '');
+---
+
+<Tag class={`block-heading block-heading-${level}`}>{text}</Tag>

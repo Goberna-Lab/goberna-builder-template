@@ -1,0 +1,34 @@
+---
+// Placeholder block renderer.
+//
+// Routes a Block by its `type` to a small set of supported renderers.
+// This file is intentionally minimal — when the real renderBlockHTML
+// from `Goberna-Lab/goberna-builder` ships, swap this file for an
+// import of that canonical renderer to get full fidelity with the editor.
+
+import type { Block } from '../types/page-data';
+import Heading from './blocks/Heading.astro';
+import Paragraph from './blocks/Paragraph.astro';
+import Image from './blocks/Image.astro';
+import Button from './blocks/Button.astro';
+import Section from './blocks/Section.astro';
+
+interface Props {
+  block: Block;
+}
+
+const { block } = Astro.props;
+---
+
+{block.type === 'heading' && <Heading block={block} />}
+{block.type === 'paragraph' && <Paragraph block={block} />}
+{block.type === 'image' && <Image block={block} />}
+{block.type === 'button' && <Button block={block} />}
+{block.type === 'section' && <Section block={block} />}
+{
+  !['heading', 'paragraph', 'image', 'button', 'section'].includes(block.type) && (
+    <div class="block-unknown" data-type={block.type}>
+      <!-- Block type "{block.type}" not yet handled by the placeholder renderer -->
+    </div>
+  )
+}

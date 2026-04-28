@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { Block, Page } from '../types/page-data';
+import Layout from '../layouts/Layout.astro';
+import BlockRenderer from '../components/Block.astro';
+import payload from '../../data/pages.json';
+
+// El payload tiene `pages: Page[]`. El worker lo inyecta antes del build.
+// Para Astro static, mapeamos cada Page a una static path.
+//
+// Slug "/" → home (params.slug === undefined → genera /index.html)
+// Slug "blog/post-1" → /blog/post-1/index.html (format: 'directory')
+
+export const getStaticPaths = (() => {
+  const pages: Page[] = (payload as any).pages ?? [];
+  return pages.map((page) => {
+    const slug = page.slug === '/' ? undefined : page.slug.replace(/^\//, '');
+    return {
+      params: { slug },
+      props: { page },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+const blocks: Block[] = page.data?.blocks ?? [];
+---
+
+<Layout title={page.title}>
+  {blocks.map((block) => <BlockRenderer block={block} />)}
+</Layout>

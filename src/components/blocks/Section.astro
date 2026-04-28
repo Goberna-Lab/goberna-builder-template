@@ -1,0 +1,12 @@
+---
+import type { Block } from '../../types/page-data';
+import BlockRenderer from '../Block.astro';
+
+interface Props { block: Block; }
+const { block } = Astro.props;
+const children: Block[] = Array.isArray(block.children) ? (block.children as Block[]) : [];
+---
+
+<section class="block-section">
+  {children.map((child) => <BlockRenderer block={child} />)}
+</section>

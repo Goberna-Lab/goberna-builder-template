@@ -1,0 +1,9 @@
+---
+import type { Block } from '../../types/page-data';
+interface Props { block: Block; }
+const { block } = Astro.props;
+const src = String(block.src ?? '');
+const alt = String(block.alt ?? '');
+---
+
+{src && <img class="block-image" src={src} alt={alt} loading="lazy" />}
